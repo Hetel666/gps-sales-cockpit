@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS.AZ Satış Kokpiti</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        /* Custom scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <!-- Chosen Palette: Warm Professional -> Background: #f8fafc (Slate-50), Primary: #0f172a (Slate-900), Accent: #3b82f6 (Blue-500), Success: #10b981 (Emerald-500) -->
+    <!-- Application Structure Plan: 
+         1. Hero/Mission: Sets the mindset immediately (Control/Safety > Hardware).
+         2. Product Hub: Tabbed interface to switch between Software (Server) and Hardware (Trackers) for quick lookup during calls.
+         3. Sales Journey: An interactive vertical stepper that guides the rep through the 5 stages, revealing scripts and tips on demand.
+         4. Objection Dojo: Interactive cards to practice or quickly find answers to tough questions.
+         5. ROI Visualizer: A tool to demonstrate the "Price Justification" argument using a live chart.
+         6. Checklist: A functional form to ensure no data is missed before contracting.
+    -->
+    <!-- Visualization & Content Choices:
+         - ROI Chart: Bar chart (Chart.js) comparing 'System Cost' vs 'Monthly Theft Loss'. Goal: Visualise the "Price Justification" argument.
+         - Product Cards: Grid layout with Unicode icons and clear specs. Goal: Quick identification of the right tool for the client.
+         - Interaction: JavaScript tabs for navigation, accordions for sales stages, dynamic calculation for ROI.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav class="bg-slate-900 text-white sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold tracking-wider text-blue-400">GPS.AZ</span>
+                    <span class="ml-2 text-sm text-slate-400 hidden sm:block">| Satış Kokpiti</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <button onclick="navigate('mission')" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-700 transition">Missiya</button>
+                        <button onclick="navigate('products')" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-700 transition">Məhsullar</button>
+                        <button onclick="navigate('process')" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-700 transition">Satış Prosesi</button>
+                        <button onclick="navigate('objections')" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-700 transition">Etirazlar</button>
+                        <button onclick="navigate('tools')" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-700 transition">Alətlər</button>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-slate-300 hover:text-white p-2">
+                        ☰
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <button onclick="navigate('mission')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-700">Missiya</button>
+                <button onclick="navigate('products')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-700">Məhsullar</button>
+                <button onclick="navigate('process')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-700">Satış Prosesi</button>
+                <button onclick="navigate('objections')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-700">Etirazlar</button>
+                <button onclick="navigate('tools')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-700">Alətlər</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen">
+        
+        <!-- SECTION 1: MISSION & MINDSET -->
+        <section id="mission" class="space-y-6 animate-fade-in">
+            <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 opacity-10 text-9xl font-bold transform translate-x-10 -translate-y-10">GPS</div>
+                <h1 class="text-3xl font-bold mb-4">Qızıl Qayda</h1>
+                <p class="text-xl text-blue-200 mb-6 font-light">Biz "cihaz" və ya "proqram" satmırıq.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-red-500/10 border border-red-500/30 p-4 rounded-lg">
+                        <h3 class="text-red-400 font-bold mb-2">❌ Səhv Yanaşma</h3>
+                        <p>"Bizdə GPS var, qiyməti 150 manatdır."</p>
+                    </div>
+                    <div class="bg-emerald-500/10 border border-emerald-500/30 p-4 rounded-lg">
+                        <h3 class="text-emerald-400 font-bold mb-2">✅ Doğru Yanaşma</h3>
+                        <p>"Biz sizə **Nəzarət, Təhlükəsizlik və Qənaət** satırıq. Xərclərinizi 30% azaltmağa kömək edirik."</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass-panel p-6 rounded-xl shadow-sm">
+                <h2 class="text-xl font-bold text-slate-800 mb-4">Günün Satış Fokusu</h2>
+                <p class="text-slate-600">Bu bölmə satış komandasının düzgün psixoloji vəziyyətdə olmasını təmin edir. Hər zəngdən əvvəl xatırlayın: müştərinin problemi "GPS olmaması" deyil, "pulu itirməsidir".</p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: PRODUCT KNOWLEDGE -->
+        <section id="products" class="hidden space-y-6">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-slate-800">Məhsul Bilik Bazası</h2>
+                <p class="text-slate-500 mt-2">Düzgün aləti düzgün müştəriyə təklif edin.</p>
+            </div>
+
+            <!-- Toggle Buttons -->
+            <div class="flex justify-center space-x-4 mb-8">
+                <button onclick="switchProductTab('software')" id="tab-software" class="px-6 py-2 bg-blue-600 text-white rounded-full shadow-md hover:bg-blue-700 transition">Serverlər (Software)</button>
+                <button onclick="switchProductTab('hardware')" id="tab-hardware" class="px-6 py-2 bg-white text-slate-600 border border-slate-300 rounded-full shadow-sm hover:bg-slate-50 transition">Avadanlıq (Hardware)</button>
+            </div>
+
+            <!-- Software View -->
+            <div id="view-software" class="grid md:grid-cols-2 gap-6">
+                <!-- Wialon Card -->
+                <div class="bg-white rounded-xl shadow-lg border-t-4 border-orange-500 overflow-hidden card-hover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-bold text-slate-800">go.gps.az</h3>
+                            <span class="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full font-bold">🏆 PEŞƏKAR</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4">go.gps.az</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center text-slate-700"><span class="mr-2">🎯</span> Logistika, Tikinti, Beton zavodları</li>
+                            <li class="flex items-center text-slate-700"><span class="mr-2">📊</span> Dərin analitika və hesabatlar</li>
+                            <li class="flex items-center text-slate-700"><span class="mr-2">⛽</span> Yanacaq oğurluğunun aşkarlanması</li>
+                            <li class="flex items-center text-slate-700"><span class="mr-2">🍃</span> Eco-Driving modulu</li>
+                        </ul>
+                        <div class="bg-slate-100 p-4 rounded-lg">
+                            <p class="text-xs text-slate-500 font-bold uppercase">Demo Giriş</p>
+                            <div class="flex justify-between mt-1">
+                                <span>Login: <strong>Demo</strong></span>
+                                <span>Parol: <strong>Demo!2!2</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GlonassSoft Card -->
+                <div class="bg-white rounded-xl shadow-lg border-t-4 border-blue-500 overflow-hidden card-hover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-2xl font-bold text-slate-800">baku.gps.az</h3>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-bold">⚡ SADƏ</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4">baku.gps.az</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center text-slate-700"><span class="mr-2">🚕</span> Taksi, Rent a Car, Şəxsi avto</li>
+                            <li class="flex items-center text-slate-700"><span class="mr-2">📱</span> Rahat mobil tətbiq</li>
+                            <li class="flex items-center text-slate-700"><span class="mr-2">🚀</span> Sürətli və sadə interfeys</li>
+                            <li class="flex items-center text-slate-700"><span class="mr-2">📍</span> Anlıq izləmə fokusu</li>
+                        </ul>
+                        <div class="bg-slate-100 p-4 rounded-lg">
+                            <p class="text-xs text-slate-500 font-bold uppercase">Demo Giriş</p>
+                            <div class="flex justify-between mt-1">
+                                <span>Login: <strong>(Yoxdur)</strong></span>
+                                <span class="text-blue-600 cursor-pointer">"Demo giriş" düyməsi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hardware View -->
+            <div id="view-hardware" class="hidden grid md:grid-cols-3 gap-6">
+                <!-- GV50 -->
+                <div class="bg-white rounded-xl shadow-md p-6 flex flex-col card-hover">
+                    <div class="h-32 bg-slate-200 rounded-lg mb-4 flex items-center justify-center text-4xl">📦</div>
+                    <h3 class="text-xl font-bold mb-1">Queclink GV50CME</h3>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-4">Baza (Budget)</span>
+                    <p class="text-sm text-slate-600 mb-4 flex-grow">Kibrit qutusu boyda, gizli quraşdırma üçün idealdır. Yüngül izləmə və mühərrik söndürmə.</p>
+                    <div class="border-t pt-4 mt-auto">
+                        <p class="text-xs text-slate-500">Müştəri tipi:</p>
+                        <p class="font-semibold text-sm">Rent a Car, Lizinq</p>
+                    </div>
+                </div>
+                <!-- FMC130 -->
+                <div class="bg-white rounded-xl shadow-md p-6 flex flex-col card-hover border-2 border-blue-100">
+                    <div class="h-32 bg-slate-200 rounded-lg mb-4 flex items-center justify-center text-4xl">🚛</div>
+                    <h3 class="text-xl font-bold mb-1">Teltonika FMC130</h3>
+                    <span class="text-xs font-bold text-blue-500 uppercase tracking-wide mb-4">Standart (Best Seller)</span>
+                    <p class="text-sm text-slate-600 mb-4 flex-grow">Yanacaq çəni (DUT), temperatur sensoru və qəza aşkarlama. Ən populyar model.</p>
+                    <div class="border-t pt-4 mt-auto">
+                        <p class="text-xs text-slate-500">Müştəri tipi:</p>
+                        <p class="font-semibold text-sm">Kamaz, Ağır texnika</p>
+                    </div>
+                </div>
+                <!-- FMC150 -->
+                <div class="bg-white rounded-xl shadow-md p-6 flex flex-col card-hover border-2 border-purple-100">
+                    <div class="h-32 bg-slate-200 rounded-lg mb-4 flex items-center justify-center text-4xl">🧠</div>
+                    <h3 class="text-xl font-bold mb-1">Teltonika FMC150</h3>
+                    <span class="text-xs font-bold text-purple-500 uppercase tracking-wide mb-4">Premium (CAN-Data)</span>
+                    <p class="text-sm text-slate-600 mb-4 flex-grow">Maşının "beynini" oxuyur (CAN-bus). Zəmanəti pozmadan yanacaq və yürüşü görür.</p>
+                    <div class="border-t pt-4 mt-auto">
+                        <p class="text-xs text-slate-500">Müştəri tipi:</p>
+                        <p class="font-semibold text-sm">Yeni Ford Transit, DAF, Volvo</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: SALES PROCESS -->
+        <section id="process" class="hidden max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 text-center">Satış Mərhələləri</h2>
+            
+            <div class="space-y-4">
+                <!-- Step 1 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
+                    <button onclick="toggleStep('step1')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
+                        <div class="flex items-center">
+                            <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">1</span>
+                            <span class="font-semibold text-lg text-slate-700">Hazırlıq və Kəşfiyyat</span>
+                        </div>
+                        <span id="icon-step1" class="text-slate-400">▼</span>
+                    </button>
+                    <div id="step1" class="hidden p-6 bg-white border-t border-slate-100">
+                        <p class="text-slate-600 mb-4">Müştərinin "ağrısını" tapın. Qiymət deməyə tələsməyin.</p>
+                        <div class="bg-blue-50 p-4 rounded-md border-l-4 border-blue-400">
+                            <h4 class="font-bold text-blue-800 mb-2">Suallar (Skript):</h4>
+                            <ul class="list-disc list-inside text-sm text-blue-900 space-y-1">
+                                <li>"Hazırda avtoparkınızı necə idarə edirsiniz?"</li>
+                                <li>"Yanacaq sərfiyyatından razısınız, yoxsa şübhələriniz var?"</li>
+                                <li>"Maşınlarınız zəmanətdədirmi?" (FMC150 üçün vacib)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
+                    <button onclick="toggleStep('step2')" class="w-full px-6 py-4 flex items-center justify-center sm:justify-between bg-slate-50 hover:bg-slate-100 transition">
+                        <div class="flex items-center">
+                            <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">2</span>
+                            <span class="font-semibold text-lg text-slate-700">Təqdimat və Demo</span>
+                        </div>
+                        <span id="icon-step2" class="text-slate-400 hidden sm:block">▼</span>
+                    </button>
+                    <div id="step2" class="hidden p-6 bg-white border-t border-slate-100">
+                        <p class="text-slate-600 mb-4">Xəritəni yox, həlli göstərin. Demo ardıcıllığı vacibdir.</p>
+                        <ol class="list-decimal list-inside space-y-2 text-slate-700">
+                            <li><strong class="text-slate-900">Hesabatlar:</strong> İlk olaraq hesabatlar bölməsini açın.</li>
+                            <li><strong class="text-slate-900">WOW Moment:</strong> Yanacaq qrafikini açın. Qrafikdəki kəskin enişi (oğurluğu) göstərin.</li>
+                            <li><strong class="text-slate-900">Marşrut:</strong> Sonda xəritədəki izi göstərin.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
+                    <button onclick="toggleStep('step3')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
+                        <div class="flex items-center">
+                            <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">3</span>
+                            <span class="font-semibold text-lg text-slate-700">Qiymət Təklifi (Sandviç)</span>
+                        </div>
+                        <span id="icon-step3" class="text-slate-400">▼</span>
+                    </button>
+                    <div id="step3" class="hidden p-6 bg-white border-t border-slate-100">
+                        <p class="text-slate-600 mb-2">Qiyməti "çılpaq" deməyin. Dəyərin arasına qoyun.</p>
+                        <div class="bg-emerald-50 p-4 rounded-md text-emerald-900 italic">
+                            "Biz sizə 5 il zəmanətli Avropa cihazını, peşəkar quraşdırmanı və ömürlük dəstəyi cəmi <strong>XXX manata</strong> təklif edirik. Bu isə cəmi 2 çən yanacaq puludur."
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
+                    <button onclick="toggleStep('step4')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
+                        <div class="flex items-center">
+                            <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">4</span>
+                            <span class="font-semibold text-lg text-slate-700">Etirazlarla İş</span>
+                        </div>
+                        <span id="icon-step4" class="text-slate-400">▼</span>
+                    </button>
+                    <div id="step4" class="hidden p-6 bg-white border-t border-slate-100">
+                        <p class="text-slate-600">Ətraflı məlumat üçün "Etirazlar" bölməsinə keçin.</p>
+                        <button onclick="navigate('objections')" class="mt-2 text-blue-600 underline text-sm">Etirazlar bölməsinə get</button>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
+                    <button onclick="toggleStep('step5')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
+                        <div class="flex items-center">
+                            <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">5</span>
+                            <span class="font-semibold text-lg text-slate-700">Bağlanış (Closing)</span>
+                        </div>
+                        <span id="icon-step5" class="text-slate-400">▼</span>
+                    </button>
+                    <div id="step5" class="hidden p-6 bg-white border-t border-slate-100">
+                        <ul class="list-none space-y-3">
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span><strong>Sınaq:</strong> "Sabah 1 maşına quraşdıraq, özünüz effekti görün."</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-green-500 mr-2">✓</span>
+                                <span><strong>Sənəd:</strong> "Rekvizitləri göndərin, müqaviləni hazırlayıram."</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: OBJECTION HANDLING -->
+        <section id="objections" class="hidden">
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 text-center">Etirazlarla İş (Dojo)</h2>
+            <p class="text-center text-slate-500 mb-8 max-w-2xl mx-auto">Müştərinin "Yox" deməsi satışın sonu deyil, başlanğıcıdır. Kartın üzərinə klikləyərək düzgün cavabı görün.</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Objection Card 1 -->
+                <div onclick="flipCard(this)" class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition h-48 relative group perspective">
+                    <div class="absolute inset-0 p-6 backface-hidden transition-transform duration-500 flex flex-col items-center justify-center text-center">
+                        <span class="text-3xl mb-2">💰</span>
+                        <h3 class="text-xl font-bold text-red-500">"Çox bahadır!"</h3>
+                        <p class="text-sm text-slate-400 mt-2">(Cavabı görmək üçün klikləyin)</p>
+                    </div>
+                    <div class="absolute inset-0 p-6 bg-slate-800 text-white rounded-xl backface-hidden transition-transform duration-500 transform rotate-y-180 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                        <p class="text-center">"Nəyə nisbətən? Bir ayda oğurlanan 100 litr yanacağa nisbətən? Bizim sistem 1 ayda öz pulunu çıxarır, qalan aylar sizə təmiz qazanc qalır."</p>
+                    </div>
+                </div>
+
+                <!-- Objection Card 2 -->
+                <div onclick="flipCard(this)" class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition h-48 relative group perspective">
+                    <div class="absolute inset-0 p-6 backface-hidden transition-transform duration-500 flex flex-col items-center justify-center text-center">
+                        <span class="text-3xl mb-2">👷</span>
+                        <h3 class="text-xl font-bold text-red-500">"Sürücülər işdən çıxacaq"</h3>
+                        <p class="text-sm text-slate-400 mt-2">(Cavabı görmək üçün klikləyin)</p>
+                    </div>
+                    <div class="absolute inset-0 p-6 bg-slate-800 text-white rounded-xl backface-hidden transition-transform duration-500 transform rotate-y-180 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                        <p class="text-center">"Dürüst sürücü üçün GPS problem deyil. Adətən yalnız oğurluq edənlər etiraz edir. Sizə şirkəti aldadan işçi lazımdır?"</p>
+                    </div>
+                </div>
+
+                <!-- Objection Card 3 -->
+                <div onclick="flipCard(this)" class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition h-48 relative group perspective">
+                    <div class="absolute inset-0 p-6 backface-hidden transition-transform duration-500 flex flex-col items-center justify-center text-center">
+                        <span class="text-3xl mb-2">🔄</span>
+                        <h3 class="text-xl font-bold text-red-500">"Bizdə artıq GPS var"</h3>
+                        <p class="text-sm text-slate-400 mt-2">(Cavabı görmək üçün klikləyin)</p>
+                    </div>
+                    <div class="absolute inset-0 p-6 bg-slate-800 text-white rounded-xl backface-hidden transition-transform duration-500 transform rotate-y-180 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                        <p class="text-center">"Əla! Bəs xidmətdən razısınız? Gəlin bizim Demonu göstərim, müqayisə edin. Bəlkə daha dəqiq hesabatlarımız var."</p>
+                    </div>
+                </div>
+
+                <!-- Objection Card 4 -->
+                <div onclick="flipCard(this)" class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition h-48 relative group perspective">
+                    <div class="absolute inset-0 p-6 backface-hidden transition-transform duration-500 flex flex-col items-center justify-center text-center">
+                        <span class="text-3xl mb-2">🤔</span>
+                        <h3 class="text-xl font-bold text-red-500">"Düşünərik"</h3>
+                        <p class="text-sm text-slate-400 mt-2">(Cavabı görmək üçün klikləyin)</p>
+                    </div>
+                    <div class="absolute inset-0 p-6 bg-slate-800 text-white rounded-xl backface-hidden transition-transform duration-500 transform rotate-y-180 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                        <p class="text-center">"Nəyi dəqiqləşdirmək istəyirsiniz? Gəlin sizə **2 həftəlik pulsuz sınaq** verək. Bəyənməsəniz, qaytararsınız."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: TOOLS (ROI & CHECKLIST) -->
+        <section id="tools" class="hidden space-y-8">
+            <!-- ROI Calculator -->
+            <div class="bg-white rounded-xl shadow-lg p-6 lg:p-8">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800 mb-4">ROI Kalkulyatoru</h2>
+                        <p class="text-slate-600 mb-6">Müştəriyə "Bahadır" etirazı zamanı bu qrafiki izah edin.</p>
+                        
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Təxmini aylıq oğurluq (litr):</label>
+                            <input type="range" id="fuelInput" min="0" max="500" value="100" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600" oninput="updateChart()">
+                            <div class="flex justify-between text-sm text-slate-500 mt-1">
+                                <span>0 L</span>
+                                <span id="fuelValue" class="font-bold text-blue-600 text-lg">100 L</span>
+                                <span>500 L</span>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <p class="text-sm text-blue-800">Yanacaq qiyməti (təxmini): <strong>1.00 AZN/L</strong></p>
+                            <p class="text-sm text-blue-800 mt-1">GPS Sistemi (təxmini): <strong>250 AZN (Birdəfəlik)</strong></p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                        <div class="chart-container">
+                            <canvas id="roiChart"></canvas>
+                        </div>
+                        <p class="text-center text-xs text-slate-500 mt-2">İllik İtki vs Sistem Xərci</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pre-Contract Checklist -->
+            <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-green-500">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">📝 Müqavilə Öncəsi "Checklist"</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700">Müştəri Adı</label>
+                            <input type="text" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm bg-slate-50 p-2 border" placeholder="Şirkət adı...">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700">Avtomobil Markası/Model</label>
+                            <input type="text" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm bg-slate-50 p-2 border" placeholder="Məs: Ford Transit 2022">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700">Yanacaq Növü</label>
+                            <select class="mt-1 block w-full rounded-md border-slate-300 shadow-sm bg-slate-50 p-2 border">
+                                <option>Dizel</option>
+                                <option>Benzin</option>
+                                <option>Qaz</option>
+                                <option>Hibrid</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <label class="block text-sm font-medium text-slate-700">Tələb olunan funksiyalar:</label>
+                        <div class="space-y-2">
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" class="form-checkbox text-blue-600 h-5 w-5">
+                                <span class="ml-2 text-slate-700">Sadə izləmə</span>
+                            </label><br>
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" class="form-checkbox text-blue-600 h-5 w-5">
+                                <span class="ml-2 text-slate-700">Mühərriki uzaqdan söndürmə</span>
+                            </label><br>
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" class="form-checkbox text-blue-600 h-5 w-5">
+                                <span class="ml-2 text-slate-700">Yanacaq səviyyəsi (DUT)</span>
+                            </label><br>
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" class="form-checkbox text-blue-600 h-5 w-5">
+                                <span class="ml-2 text-slate-700">CAN-bus (Zəmanətli)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-end">
+                    <button class="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition shadow-md">Sifarişi Tamamla</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p>&copy; 2024 GPS.AZ Satış Departamenti. Daxili istifadə üçün.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Navigation Logic ---
+        function navigate(sectionId) {
+            // Hide all sections
+            const sections = ['mission', 'products', 'process', 'objections', 'tools'];
+            sections.forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+                document.getElementById(id).classList.remove('animate-fade-in');
+            });
+
+            // Show selected section
+            const activeSection = document.getElementById(sectionId);
+            activeSection.classList.remove('hidden');
+            activeSection.classList.add('animate-fade-in');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+
+            // Trigger chart update if tools section is opened to ensure proper rendering
+            if (sectionId === 'tools') {
+                setTimeout(updateChart, 100);
+            }
+        }
+
+        // --- Product Tab Logic ---
+        function switchProductTab(type) {
+            const softwareView = document.getElementById('view-software');
+            const hardwareView = document.getElementById('view-hardware');
+            const tabSoftware = document.getElementById('tab-software');
+            const tabHardware = document.getElementById('tab-hardware');
+
+            if (type === 'software') {
+                softwareView.classList.remove('hidden');
+                hardwareView.classList.add('hidden');
+                
+                tabSoftware.classList.add('bg-blue-600', 'text-white');
+                tabSoftware.classList.remove('bg-white', 'text-slate-600');
+                
+                tabHardware.classList.remove('bg-blue-600', 'text-white');
+                tabHardware.classList.add('bg-white', 'text-slate-600');
+            } else {
+                softwareView.classList.add('hidden');
+                hardwareView.classList.remove('hidden');
+
+                tabSoftware.classList.remove('bg-blue-600', 'text-white');
+                tabSoftware.classList.add('bg-white', 'text-slate-600');
+                
+                tabHardware.classList.add('bg-blue-600', 'text-white');
+                tabHardware.classList.remove('bg-white', 'text-slate-600');
+            }
+        }
+
+        // --- Sales Process Accordion ---
+        function toggleStep(stepId) {
+            const content = document.getElementById(stepId);
+            const icon = document.getElementById('icon-' + stepId);
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.textContent = '▲';
+            } else {
+                content.classList.add('hidden');
+                icon.textContent = '▼';
+            }
+        }
+
+        // --- Objection Card Flip ---
+        function flipCard(card) {
+            const front = card.children[0];
+            const back = card.children[1];
+            
+            if (back.style.opacity === '1') {
+                back.style.opacity = '0';
+                back.style.transform = 'rotateY(180deg)';
+                front.style.opacity = '1';
+                front.style.transform = 'rotateY(0deg)';
+            } else {
+                back.style.opacity = '1';
+                back.style.transform = 'rotateY(0deg)';
+                front.style.opacity = '0';
+                front.style.transform = 'rotateY(180deg)';
+            }
+        }
+
+        // --- Chart.js ROI Logic ---
+        let roiChartInstance = null;
+
+        function initChart() {
+            const ctx = document.getElementById('roiChart').getContext('2d');
+            
+            roiChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Sizin Sistem Xərciniz (Birdəfəlik)', 'İllik Yanacaq İtkisi'],
+                    datasets: [{
+                        label: 'Məbləğ (AZN)',
+                        data: [250, 1200], // Initial values
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.7)', // Blue for System
+                            'rgba(239, 68, 68, 0.7)'   // Red for Loss
+                        ],
+                        borderColor: [
+                            'rgb(59, 130, 246)',
+                            'rgb(239, 68, 68)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + ' AZN';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Məbləğ (AZN)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChart() {
+            const liters = document.getElementById('fuelInput').value;
+            document.getElementById('fuelValue').textContent = liters + ' L';
+            
+            const fuelPrice = 1.00; // AZN
+            const monthlyLoss = liters * fuelPrice;
+            const annualLoss = monthlyLoss * 12;
+            const systemCost = 250; // Fixed estimate
+
+            if (roiChartInstance) {
+                roiChartInstance.data.datasets[0].data = [systemCost, annualLoss];
+                roiChartInstance.update();
+            } else {
+                initChart();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initChart();
+            // Start at Mission tab
+            navigate('mission');
+        });
+
+    </script>
+    <style>
+        .perspective {
+            perspective: 1000px;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+    </style>
+</body>
+</html>
