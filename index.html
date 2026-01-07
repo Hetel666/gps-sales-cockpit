@@ -94,9 +94,10 @@
         
         <!-- SECTION 1: MISSION & MINDSET -->
         <section id="mission" class="space-y-6 animate-fade-in">
-            <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
+            <!-- Main Golden Rule -->
+            <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-8 text-white shadow-xl relative overflow-hidden mb-8">
                 <div class="absolute top-0 right-0 opacity-10 text-9xl font-bold transform translate-x-10 -translate-y-10">GPS</div>
-                <h1 class="text-3xl font-bold mb-4">Qızıl Qayda</h1>
+                <h1 class="text-3xl font-bold mb-4">Əsas Qızıl Qayda</h1>
                 <p class="text-xl text-blue-200 mb-6 font-light">Biz "cihaz" və ya "proqram" satmırıq.</p>
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="bg-red-500/10 border border-red-500/30 p-4 rounded-lg">
@@ -109,10 +110,62 @@
                     </div>
                 </div>
             </div>
-            
+
+            <!-- Situational Golden Rules -->
             <div class="glass-panel p-6 rounded-xl shadow-sm">
-                <h2 class="text-xl font-bold text-slate-800 mb-4">Günün Satış Fokusu</h2>
-                <p class="text-slate-600">Bu bölmə satış komandasının düzgün psixoloji vəziyyətdə olmasını təmin edir. Hər zəngdən əvvəl xatırlayın: müştərinin problemi "GPS olmaması" deyil, "pulu itirməsidir".</p>
+                <h2 class="text-xl font-bold text-slate-800 mb-6">Situativ Qızıl Qaydalar</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Situation 1: Price -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-500 hover:shadow-lg transition">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl mr-2">💸</span>
+                            <h3 class="font-bold text-slate-800">Qiymət Müzakirəsi</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-1 uppercase font-bold">Müştəri deyəndə: "Bahadır"</p>
+                        <div class="space-y-3 mt-3">
+                            <div class="text-sm text-red-400 border-l-2 border-red-200 pl-2">
+                                ❌ "Bizim mal keyfiyyətlidir."
+                            </div>
+                            <div class="text-sm text-green-600 font-semibold border-l-2 border-green-500 pl-2">
+                                ✅ "Ucuz cihaz bir dəfə 20 AZN qənaət edir. Bizim sistem isə hər ay 500 AZN yanacaq qazandırır. Hansı qənaəti seçirsiniz?"
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Situation 2: Support -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-purple-500 hover:shadow-lg transition">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl mr-2">🤝</span>
+                            <h3 class="font-bold text-slate-800">Dəstək Vədi</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-1 uppercase font-bold">Müştəri deyəndə: "Xarab olsa?"</p>
+                        <div class="space-y-3 mt-3">
+                            <div class="text-sm text-red-400 border-l-2 border-red-200 pl-2">
+                                ❌ "1 il zəmanət veririk."
+                            </div>
+                            <div class="text-sm text-green-600 font-semibold border-l-2 border-green-500 pl-2">
+                                ✅ "Biz sadəcə satıb getmirik. Biz sizin kənar texniki şöbəniz kimi işləyirik. Bir zənginiz hər şeyi həll edir."
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Situation 3: Driver Fear -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-orange-500 hover:shadow-lg transition">
+                        <div class="flex items-center mb-3">
+                            <span class="text-2xl mr-2">🚚</span>
+                            <h3 class="font-bold text-slate-800">Sürücü Etirazı</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-1 uppercase font-bold">Müştəri deyəndə: "Sürücülər qaçacaq"</p>
+                        <div class="space-y-3 mt-3">
+                            <div class="text-sm text-red-400 border-l-2 border-red-200 pl-2">
+                                ❌ "Onları məcbur edin."
+                            </div>
+                            <div class="text-sm text-green-600 font-semibold border-l-2 border-green-500 pl-2">
+                                ✅ "Dürüst sürücü üçün GPS sığortadır. Sistem yalnız oğurluq edənləri narahat edir. Sizə kim lazımdır: Dürüst işçi yoxsa oğru?"
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -132,87 +185,159 @@
             <!-- Software View -->
             <div id="view-software" class="grid md:grid-cols-2 gap-6">
                 <!-- Wialon Card -->
-                <div class="bg-white rounded-xl shadow-lg border-t-4 border-orange-500 overflow-hidden card-hover">
-                    <div class="p-6">
+                <div class="bg-white rounded-xl shadow-lg border-t-4 border-orange-500 overflow-hidden card-hover flex flex-col">
+                    <div class="p-6 flex flex-col h-full">
                         <div class="flex justify-between items-start mb-4">
                             <h3 class="text-2xl font-bold text-slate-800">go.gps.az</h3>
                             <span class="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full font-bold">🏆 PEŞƏKAR</span>
                         </div>
-                        <p class="text-sm text-slate-500 mb-4">go.gps.az</p>
-                        <ul class="space-y-3 mb-6">
+                        <a href="https://go.gps.az" target="_blank" class="text-sm text-blue-600 hover:text-blue-800 hover:underline mb-4 inline-block font-medium">Link: go.gps.az ↗</a>
+                        
+                        <ul class="space-y-3 mb-6 flex-grow">
                             <li class="flex items-center text-slate-700"><span class="mr-2">🎯</span> Logistika, Tikinti, Beton zavodları</li>
                             <li class="flex items-center text-slate-700"><span class="mr-2">📊</span> Dərin analitika və hesabatlar</li>
                             <li class="flex items-center text-slate-700"><span class="mr-2">⛽</span> Yanacaq oğurluğunun aşkarlanması</li>
                             <li class="flex items-center text-slate-700"><span class="mr-2">🍃</span> Eco-Driving modulu</li>
                         </ul>
-                        <div class="bg-slate-100 p-4 rounded-lg">
+                        <div class="bg-slate-100 p-4 rounded-lg mb-4">
                             <p class="text-xs text-slate-500 font-bold uppercase">Demo Giriş</p>
                             <div class="flex justify-between mt-1">
                                 <span>Login: <strong>Demo</strong></span>
                                 <span>Parol: <strong>Demo!2!2</strong></span>
                             </div>
                         </div>
+                        <a href="https://go.gps.az" target="_blank" class="w-full block text-center bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition shadow-md">
+                            Sistemə Keçid
+                        </a>
                     </div>
                 </div>
 
                 <!-- GlonassSoft Card -->
-                <div class="bg-white rounded-xl shadow-lg border-t-4 border-blue-500 overflow-hidden card-hover">
-                    <div class="p-6">
+                <div class="bg-white rounded-xl shadow-lg border-t-4 border-blue-500 overflow-hidden card-hover flex flex-col">
+                    <div class="p-6 flex flex-col h-full">
                         <div class="flex justify-between items-start mb-4">
                             <h3 class="text-2xl font-bold text-slate-800">baku.gps.az</h3>
                             <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-bold">⚡ SADƏ</span>
                         </div>
-                        <p class="text-sm text-slate-500 mb-4">baku.gps.az</p>
-                        <ul class="space-y-3 mb-6">
+                        <a href="https://baku.gps.az" target="_blank" class="text-sm text-blue-600 hover:text-blue-800 hover:underline mb-4 inline-block font-medium">Link: baku.gps.az ↗</a>
+                        
+                        <ul class="space-y-3 mb-6 flex-grow">
                             <li class="flex items-center text-slate-700"><span class="mr-2">🚕</span> Taksi, Rent a Car, Şəxsi avto</li>
                             <li class="flex items-center text-slate-700"><span class="mr-2">📱</span> Rahat mobil tətbiq</li>
                             <li class="flex items-center text-slate-700"><span class="mr-2">🚀</span> Sürətli və sadə interfeys</li>
                             <li class="flex items-center text-slate-700"><span class="mr-2">📍</span> Anlıq izləmə fokusu</li>
                         </ul>
-                        <div class="bg-slate-100 p-4 rounded-lg">
+                        <div class="bg-slate-100 p-4 rounded-lg mb-4">
                             <p class="text-xs text-slate-500 font-bold uppercase">Demo Giriş</p>
                             <div class="flex justify-between mt-1">
                                 <span>Login: <strong>(Yoxdur)</strong></span>
                                 <span class="text-blue-600 cursor-pointer">"Demo giriş" düyməsi</span>
                             </div>
                         </div>
+                         <a href="https://baku.gps.az" target="_blank" class="w-full block text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition shadow-md">
+                            Sistemə Keçid
+                        </a>
                     </div>
                 </div>
             </div>
 
             <!-- Hardware View -->
             <div id="view-hardware" class="hidden grid md:grid-cols-3 gap-6">
-                <!-- GV50 -->
-                <div class="bg-white rounded-xl shadow-md p-6 flex flex-col card-hover">
-                    <div class="h-32 bg-slate-200 rounded-lg mb-4 flex items-center justify-center text-4xl">📦</div>
-                    <h3 class="text-xl font-bold mb-1">Queclink GV50CME</h3>
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-4">Baza (Budget)</span>
-                    <p class="text-sm text-slate-600 mb-4 flex-grow">Kibrit qutusu boyda, gizli quraşdırma üçün idealdır. Yüngül izləmə və mühərrik söndürmə.</p>
-                    <div class="border-t pt-4 mt-auto">
-                        <p class="text-xs text-slate-500">Müştəri tipi:</p>
-                        <p class="font-semibold text-sm">Rent a Car, Lizinq</p>
+                <!-- GV50 CME Card -->
+                <div class="bg-white rounded-xl shadow-md flex flex-col card-hover h-full">
+                    <div class="p-6 flex flex-col h-full">
+                        <div class="h-32 bg-slate-200 rounded-lg mb-4 flex items-center justify-center text-4xl">📦</div>
+                        <h3 class="text-xl font-bold mb-1">Queclink GV50CME</h3>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-4">Baza (Budget)</span>
+                        
+                        <p class="text-sm text-slate-600 mb-4">Kibrit qutusu boyda, gizli quraşdırma üçün idealdır.</p>
+                        
+                        <div class="mt-auto">
+                            <button onclick="toggleSpecs('specs-gv50')" class="w-full text-center text-blue-600 text-sm font-semibold hover:text-blue-800 mb-2">
+                                ▼ Tam Xarakteristika
+                            </button>
+                            <div id="specs-gv50" class="hidden bg-slate-50 p-3 rounded text-xs border border-slate-200">
+                                <ul class="space-y-1">
+                                    <li><strong>Texnologiya:</strong> LTE Cat 1 / 2G (GSM)</li>
+                                    <li><strong>Ölçülər:</strong> 61.5 x 44.5 x 15 mm (35 qram)</li>
+                                    <li><strong>Gərginlik:</strong> 8V - 32V DC</li>
+                                    <li><strong>Batareya:</strong> Daxili 190 mAh Li-Polymer</li>
+                                    <li><strong>İnterfeyslər:</strong> 1 Rəqəmsal Giriş (Alovlanma), 1 Rəqəmsal Çıxış (Relye)</li>
+                                    <li><strong>Xüsusiyyətlər:</strong> Tow Alarm (Evakuasiya), Sürücü davranışı, Aşağı gərginlik alarmı.</li>
+                                    <li class="text-green-600 font-bold"><strong>Üstünlük:</strong> Ultra-kompakt, asan gizlədilən.</li>
+                                </ul>
+                            </div>
+                            <div class="border-t pt-3 mt-2">
+                                <p class="text-xs text-slate-500">Müştəri tipi:</p>
+                                <p class="font-semibold text-sm">Rent a Car, Lizinq</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- FMC130 -->
-                <div class="bg-white rounded-xl shadow-md p-6 flex flex-col card-hover border-2 border-blue-100">
-                    <div class="h-32 bg-slate-200 rounded-lg mb-4 flex items-center justify-center text-4xl">🚛</div>
-                    <h3 class="text-xl font-bold mb-1">Teltonika FMC130</h3>
-                    <span class="text-xs font-bold text-blue-500 uppercase tracking-wide mb-4">Standart (Best Seller)</span>
-                    <p class="text-sm text-slate-600 mb-4 flex-grow">Yanacaq çəni (DUT), temperatur sensoru və qəza aşkarlama. Ən populyar model.</p>
-                    <div class="border-t pt-4 mt-auto">
-                        <p class="text-xs text-slate-500">Müştəri tipi:</p>
-                        <p class="font-semibold text-sm">Kamaz, Ağır texnika</p>
+
+                <!-- FMC130 Card -->
+                <div class="bg-white rounded-xl shadow-md flex flex-col card-hover border-2 border-blue-100 h-full">
+                    <div class="p-6 flex flex-col h-full">
+                        <div class="h-32 bg-slate-200 rounded-lg mb-4 flex items-center justify-center text-4xl">🚛</div>
+                        <h3 class="text-xl font-bold mb-1">Teltonika FMC130</h3>
+                        <span class="text-xs font-bold text-blue-500 uppercase tracking-wide mb-4">Standart (Best Seller)</span>
+                        
+                        <p class="text-sm text-slate-600 mb-4">Yanacaq çəni (DUT), temperatur və qəza aşkarlama.</p>
+                        
+                        <div class="mt-auto">
+                            <button onclick="toggleSpecs('specs-fmc130')" class="w-full text-center text-blue-600 text-sm font-semibold hover:text-blue-800 mb-2">
+                                ▼ Tam Xarakteristika
+                            </button>
+                            <div id="specs-fmc130" class="hidden bg-slate-50 p-3 rounded text-xs border border-slate-200">
+                                <ul class="space-y-1">
+                                    <li><strong>Texnologiya:</strong> 4G (LTE Cat 1) + 2G</li>
+                                    <li><strong>GNSS:</strong> GPS, GLONASS, GALILEO, BEIDOU</li>
+                                    <li><strong>Gərginlik:</strong> 10 - 30 V DC (Qorunma ilə)</li>
+                                    <li><strong>Batareya:</strong> 170 mAh Li-Ion 3.7 V</li>
+                                    <li><strong>Giriş/Çıxış:</strong> 3 DIN, 3 DOUT, 2 AIN, 1-Wire, USB</li>
+                                    <li><strong>Bluetooth:</strong> 4.0 + LE (Temperatur, Nəm, Hərəkət)</li>
+                                    <li><strong>Ssenarilər:</strong> Eco-Driving, Crash detection, İmmobilayzer</li>
+                                    <li class="text-blue-600 font-bold"><strong>Üstünlük:</strong> Universal, Ən çox satılan.</li>
+                                </ul>
+                            </div>
+                            <div class="border-t pt-3 mt-2">
+                                <p class="text-xs text-slate-500">Müştəri tipi:</p>
+                                <p class="font-semibold text-sm">Kamaz, Ağır texnika</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- FMC150 -->
-                <div class="bg-white rounded-xl shadow-md p-6 flex flex-col card-hover border-2 border-purple-100">
-                    <div class="h-32 bg-slate-200 rounded-lg mb-4 flex items-center justify-center text-4xl">🧠</div>
-                    <h3 class="text-xl font-bold mb-1">Teltonika FMC150</h3>
-                    <span class="text-xs font-bold text-purple-500 uppercase tracking-wide mb-4">Premium (CAN-Data)</span>
-                    <p class="text-sm text-slate-600 mb-4 flex-grow">Maşının "beynini" oxuyur (CAN-bus). Zəmanəti pozmadan yanacaq və yürüşü görür.</p>
-                    <div class="border-t pt-4 mt-auto">
-                        <p class="text-xs text-slate-500">Müştəri tipi:</p>
-                        <p class="font-semibold text-sm">Yeni Ford Transit, DAF, Volvo</p>
+
+                <!-- FMC150 Card -->
+                <div class="bg-white rounded-xl shadow-md flex flex-col card-hover border-2 border-purple-100 h-full">
+                    <div class="p-6 flex flex-col h-full">
+                        <div class="h-32 bg-slate-200 rounded-lg mb-4 flex items-center justify-center text-4xl">🧠</div>
+                        <h3 class="text-xl font-bold mb-1">Teltonika FMC150</h3>
+                        <span class="text-xs font-bold text-purple-500 uppercase tracking-wide mb-4">Premium (CAN-Data)</span>
+                        
+                        <p class="text-sm text-slate-600 mb-4">Maşının "beynini" oxuyur (CAN-bus). Zəmanəti pozmur.</p>
+                        
+                        <div class="mt-auto">
+                            <button onclick="toggleSpecs('specs-fmc150')" class="w-full text-center text-blue-600 text-sm font-semibold hover:text-blue-800 mb-2">
+                                ▼ Tam Xarakteristika
+                            </button>
+                            <div id="specs-fmc150" class="hidden bg-slate-50 p-3 rounded text-xs border border-slate-200">
+                                <ul class="space-y-1">
+                                    <li><strong>Xüsusiyyət:</strong> İnteqrasiya olunmuş CAN-BUS oxuyucu</li>
+                                    <li><strong>Dəstək:</strong> 1500+ model avtomobil</li>
+                                    <li><strong>Məlumatlar:</strong> Yanacaq səviyyəsi, RPM, Yürüş, Qapılar</li>
+                                    <li><strong>Texnologiya:</strong> 4G (LTE Cat 1) + 2G</li>
+                                    <li><strong>Gərginlik:</strong> 10 - 30 V DC</li>
+                                    <li><strong>Batareya:</strong> 170 mAh Li-Ion</li>
+                                    <li><strong>Giriş/Çıxış:</strong> 3 DIN, 2 DOUT, 2 AIN</li>
+                                    <li class="text-purple-600 font-bold"><strong>Üstünlük:</strong> Təmassız qoşulma, Zəmanəti saxlayır.</li>
+                                </ul>
+                            </div>
+                            <div class="border-t pt-3 mt-2">
+                                <p class="text-xs text-slate-500">Müştəri tipi:</p>
+                                <p class="font-semibold text-sm">Yeni Ford Transit, DAF</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -222,99 +347,192 @@
         <section id="process" class="hidden max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold text-slate-800 mb-8 text-center">Satış Mərhələləri</h2>
             
-            <div class="space-y-4">
-                <!-- Step 1 -->
+            <!-- Process Tabs -->
+            <div class="flex justify-center space-x-4 mb-8">
+                <button onclick="switchProcessTab('b2c')" id="tab-process-b2c" class="px-6 py-2 bg-blue-600 text-white rounded-full shadow-md hover:bg-blue-700 transition">Fiziki Şəxslər (B2C)</button>
+                <button onclick="switchProcessTab('b2b')" id="tab-process-b2b" class="px-6 py-2 bg-white text-slate-600 border border-slate-300 rounded-full shadow-sm hover:bg-slate-50 transition">Hüquqi Şəxslər (B2B)</button>
+            </div>
+
+            <!-- B2C Process View (Default) -->
+            <div id="process-b2c" class="space-y-4">
+                <div class="bg-blue-50 p-4 rounded-lg mb-6 border-l-4 border-blue-500">
+                    <p class="text-blue-800 text-sm"><strong>Fokus:</strong> Sadəlik, Təhlükəsizlik, Mobil Tətbiq.</p>
+                </div>
+
+                <!-- Step 1 B2C -->
                 <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
-                    <button onclick="toggleStep('step1')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
+                    <button onclick="toggleStep('step1-b2c')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
                         <div class="flex items-center">
                             <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">1</span>
-                            <span class="font-semibold text-lg text-slate-700">Hazırlıq və Kəşfiyyat</span>
+                            <span class="font-semibold text-lg text-slate-700">Ehtiyacın Öyrənilməsi (Discovery)</span>
                         </div>
-                        <span id="icon-step1" class="text-slate-400">▼</span>
+                        <span id="icon-step1-b2c" class="text-slate-400">▼</span>
                     </button>
-                    <div id="step1" class="hidden p-6 bg-white border-t border-slate-100">
-                        <p class="text-slate-600 mb-4">Müştərinin "ağrısını" tapın. Qiymət deməyə tələsməyin.</p>
-                        <div class="bg-blue-50 p-4 rounded-md border-l-4 border-blue-400">
-                            <h4 class="font-bold text-blue-800 mb-2">Suallar (Skript):</h4>
-                            <ul class="list-disc list-inside text-sm text-blue-900 space-y-1">
-                                <li>"Hazırda avtoparkınızı necə idarə edirsiniz?"</li>
-                                <li>"Yanacaq sərfiyyatından razısınız, yoxsa şübhələriniz var?"</li>
-                                <li>"Maşınlarınız zəmanətdədirmi?" (FMC150 üçün vacib)</li>
-                            </ul>
-                        </div>
+                    <div id="step1-b2c" class="hidden p-6 bg-white border-t border-slate-100">
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li>"Avtomobili kim idarə edir? Siz yoxsa ailə üzvü?"</li>
+                            <li>"Oğurluqdan narahatsınız yoxsa sadəcə yerini bilmək istəyirsiniz?"</li>
+                            <li>"Telefonunuza proqram yükləmisinizmi?"</li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- Step 2 -->
+                <!-- Step 2 B2C -->
                 <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
-                    <button onclick="toggleStep('step2')" class="w-full px-6 py-4 flex items-center justify-center sm:justify-between bg-slate-50 hover:bg-slate-100 transition">
+                    <button onclick="toggleStep('step2-b2c')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
                         <div class="flex items-center">
                             <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">2</span>
-                            <span class="font-semibold text-lg text-slate-700">Təqdimat və Demo</span>
+                            <span class="font-semibold text-lg text-slate-700">Demo (Sadəlik)</span>
                         </div>
-                        <span id="icon-step2" class="text-slate-400 hidden sm:block">▼</span>
+                        <span id="icon-step2-b2c" class="text-slate-400">▼</span>
                     </button>
-                    <div id="step2" class="hidden p-6 bg-white border-t border-slate-100">
-                        <p class="text-slate-600 mb-4">Xəritəni yox, həlli göstərin. Demo ardıcıllığı vacibdir.</p>
-                        <ol class="list-decimal list-inside space-y-2 text-slate-700">
-                            <li><strong class="text-slate-900">Hesabatlar:</strong> İlk olaraq hesabatlar bölməsini açın.</li>
-                            <li><strong class="text-slate-900">WOW Moment:</strong> Yanacaq qrafikini açın. Qrafikdəki kəskin enişi (oğurluğu) göstərin.</li>
-                            <li><strong class="text-slate-900">Marşrut:</strong> Sonda xəritədəki izi göstərin.</li>
-                        </ol>
+                    <div id="step2-b2c" class="hidden p-6 bg-white border-t border-slate-100">
+                        <p class="text-slate-600 mb-2">GlonassSoft tətbiqini göstərin.</p>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li>"Baxın, bir düyməni basırsınız və maşın xəritədə görünür."</li>
+                            <li>"Burada maşının sürətini və harada dayandığını görə bilərsiniz."</li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- Step 3 -->
+                <!-- Step 3 B2C -->
                 <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
-                    <button onclick="toggleStep('step3')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
+                    <button onclick="toggleStep('step3-b2c')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
                         <div class="flex items-center">
                             <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">3</span>
-                            <span class="font-semibold text-lg text-slate-700">Qiymət Təklifi (Sandviç)</span>
+                            <span class="font-semibold text-lg text-slate-700">Təklif və Qiymət</span>
                         </div>
-                        <span id="icon-step3" class="text-slate-400">▼</span>
+                        <span id="icon-step3-b2c" class="text-slate-400">▼</span>
                     </button>
-                    <div id="step3" class="hidden p-6 bg-white border-t border-slate-100">
-                        <p class="text-slate-600 mb-2">Qiyməti "çılpaq" deməyin. Dəyərin arasına qoyun.</p>
+                    <div id="step3-b2c" class="hidden p-6 bg-white border-t border-slate-100">
                         <div class="bg-emerald-50 p-4 rounded-md text-emerald-900 italic">
-                            "Biz sizə 5 il zəmanətli Avropa cihazını, peşəkar quraşdırmanı və ömürlük dəstəyi cəmi <strong>XXX manata</strong> təklif edirik. Bu isə cəmi 2 çən yanacaq puludur."
+                            "Cihazın birdəfəlik qiyməti XXX AZN-dir. Aylıq xidmət haqqı isə cəmi XX AZN-dir. Bu da gündəlik 1 qutu siqaret pulundan azdır."
                         </div>
                     </div>
                 </div>
 
-                <!-- Step 4 -->
+                <!-- Step 4 B2C -->
                 <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
-                    <button onclick="toggleStep('step4')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
+                    <button onclick="toggleStep('step4-b2c')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
                         <div class="flex items-center">
                             <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">4</span>
-                            <span class="font-semibold text-lg text-slate-700">Etirazlarla İş</span>
+                            <span class="font-semibold text-lg text-slate-700">Etirazlar</span>
                         </div>
-                        <span id="icon-step4" class="text-slate-400">▼</span>
+                        <span id="icon-step4-b2c" class="text-slate-400">▼</span>
                     </button>
-                    <div id="step4" class="hidden p-6 bg-white border-t border-slate-100">
-                        <p class="text-slate-600">Ətraflı məlumat üçün "Etirazlar" bölməsinə keçin.</p>
-                        <button onclick="navigate('objections')" class="mt-2 text-blue-600 underline text-sm">Etirazlar bölməsinə get</button>
+                    <div id="step4-b2c" class="hidden p-6 bg-white border-t border-slate-100">
+                        <ul class="space-y-2">
+                            <li><strong>"Akkumulyatoru öldürmür?"</strong> - "Xeyr, cihazın "yuxu rejimi" var, maşın dayananda sönür."</li>
+                            <li><strong>"Quraşdırmaq çətindir?"</strong> - "Usta 30 dəqiqəyə quraşdırır və gizlədir."</li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- Step 5 -->
+                <!-- Step 5 B2C -->
                 <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
-                    <button onclick="toggleStep('step5')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
+                    <button onclick="toggleStep('step5-b2c')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
+                        <div class="flex items-center">
+                            <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">5</span>
+                            <span class="font-semibold text-lg text-slate-700">Bağlanış</span>
+                        </div>
+                        <span id="icon-step5-b2c" class="text-slate-400">▼</span>
+                    </button>
+                    <div id="step5-b2c" class="hidden p-6 bg-white border-t border-slate-100">
+                        <p>"Sabah ustamız yaxınlaşsın quraşdırsın? Ünvanı WhatsApp-a göndərin."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- B2B Process View (Hidden) -->
+            <div id="process-b2b" class="hidden space-y-4">
+                <div class="bg-purple-50 p-4 rounded-lg mb-6 border-l-4 border-purple-500">
+                    <p class="text-purple-800 text-sm"><strong>Fokus:</strong> Qənaət, Nəzarət, Hesabatlar, ROI.</p>
+                </div>
+
+                <!-- Step 1 B2B -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
+                    <button onclick="toggleStep('step1-b2b')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
+                        <div class="flex items-center">
+                            <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">1</span>
+                            <span class="font-semibold text-lg text-slate-700">Biznes Analizi (Discovery)</span>
+                        </div>
+                        <span id="icon-step1-b2b" class="text-slate-400">▼</span>
+                    </button>
+                    <div id="step1-b2b" class="hidden p-6 bg-white border-t border-slate-100">
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li>"Parkınızda neçə ədəd texnika var?"</li>
+                            <li>"Aylıq yanacaq xərciniz təxminən nə qədərdir?"</li>
+                            <li>"Sürücülərin 'sol' reyslərə getməsindən şübhələnirsiniz?"</li>
+                            <li>"Maşınlar zəmanətdədirmi?"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Step 2 B2B -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
+                    <button onclick="toggleStep('step2-b2b')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
+                        <div class="flex items-center">
+                            <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">2</span>
+                            <span class="font-semibold text-lg text-slate-700">Demo (Analitika)</span>
+                        </div>
+                        <span id="icon-step2-b2b" class="text-slate-400">▼</span>
+                    </button>
+                    <div id="step2-b2b" class="hidden p-6 bg-white border-t border-slate-100">
+                        <p class="text-slate-600 mb-2">Wialon platformasını göstərin.</p>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li><strong>Yanacaq Qrafiki:</strong> Oğurluq anını (kəskin enməni) göstərin.</li>
+                            <li><strong>Marşrut Tarixçəsi:</strong> İşdən kənar istifadəni göstərin.</li>
+                            <li><strong>Geozonalar:</strong> Baza və obyektlərə giriş-çıxış vaxtları.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Step 3 B2B -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
+                    <button onclick="toggleStep('step3-b2b')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
+                        <div class="flex items-center">
+                            <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">3</span>
+                            <span class="font-semibold text-lg text-slate-700">ROI Təklifi (Qazanc)</span>
+                        </div>
+                        <span id="icon-step3-b2b" class="text-slate-400">▼</span>
+                    </button>
+                    <div id="step3-b2b" class="hidden p-6 bg-white border-t border-slate-100">
+                        <div class="bg-purple-50 p-4 rounded-md text-purple-900 italic">
+                            "Sizin aylıq itkiniz təxminən 500 AZN-dir. Bizim sistemi quraşdırmaq üçün bir dəfə 300 AZN xərcləyəcəksiniz. Sistem 1-ci ayda öz pulunu çıxarır, ilin qalan 11 ayı sizə təmiz qazanc qalır."
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 B2B -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
+                    <button onclick="toggleStep('step4-b2b')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
+                        <div class="flex items-center">
+                            <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">4</span>
+                            <span class="font-semibold text-lg text-slate-700">B2B Etirazlar</span>
+                        </div>
+                        <span id="icon-step4-b2b" class="text-slate-400">▼</span>
+                    </button>
+                    <div id="step4-b2b" class="hidden p-6 bg-white border-t border-slate-100">
+                        <ul class="space-y-2">
+                            <li><strong>"Sürücülər işdən çıxacaq"</strong> - "Sizə şirkəti aldadan işçi lazımdır? Dürüst işçi qalacaq."</li>
+                            <li><strong>"Büdcəmiz yoxdur"</strong> - "Bu xərc deyil, investisiyadır. İtirdiyiniz yanacaq pulu daha çoxdur."</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Step 5 B2B -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-slate-200">
+                    <button onclick="toggleStep('step5-b2b')" class="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition">
                         <div class="flex items-center">
                             <span class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 font-bold">5</span>
                             <span class="font-semibold text-lg text-slate-700">Bağlanış (Closing)</span>
                         </div>
-                        <span id="icon-step5" class="text-slate-400">▼</span>
+                        <span id="icon-step5-b2b" class="text-slate-400">▼</span>
                     </button>
-                    <div id="step5" class="hidden p-6 bg-white border-t border-slate-100">
-                        <ul class="list-none space-y-3">
-                            <li class="flex items-center">
-                                <span class="text-green-500 mr-2">✓</span>
-                                <span><strong>Sınaq:</strong> "Sabah 1 maşına quraşdıraq, özünüz effekti görün."</span>
-                            </li>
-                            <li class="flex items-center">
-                                <span class="text-green-500 mr-2">✓</span>
-                                <span><strong>Sənəd:</strong> "Rekvizitləri göndərin, müqaviləni hazırlayıram."</span>
-                            </li>
+                    <div id="step5-b2b" class="hidden p-6 bg-white border-t border-slate-100">
+                        <ul class="list-none space-y-2">
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> "Gəlin 1 maşında Sınaq (Pilot) edək."</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> "Rekvizitləri göndərin, müqaviləni hazırlayaq."</li>
                         </ul>
                     </div>
                 </div>
@@ -628,6 +846,34 @@ Xahiş edirik texniki şöbəyə yönləndirin.
             }
         }
 
+        // --- Sales Process Tab Logic ---
+        function switchProcessTab(type) {
+            const b2cView = document.getElementById('process-b2c');
+            const b2bView = document.getElementById('process-b2b');
+            const tabB2C = document.getElementById('tab-process-b2c');
+            const tabB2B = document.getElementById('tab-process-b2b');
+
+            if (type === 'b2c') {
+                b2cView.classList.remove('hidden');
+                b2bView.classList.add('hidden');
+                
+                tabB2C.classList.add('bg-blue-600', 'text-white');
+                tabB2C.classList.remove('bg-white', 'text-slate-600');
+                
+                tabB2B.classList.remove('bg-blue-600', 'text-white');
+                tabB2B.classList.add('bg-white', 'text-slate-600');
+            } else {
+                b2cView.classList.add('hidden');
+                b2bView.classList.remove('hidden');
+
+                tabB2C.classList.remove('bg-blue-600', 'text-white');
+                tabB2C.classList.add('bg-white', 'text-slate-600');
+                
+                tabB2B.classList.add('bg-blue-600', 'text-white');
+                tabB2B.classList.remove('bg-white', 'text-slate-600');
+            }
+        }
+
         // --- Sales Process Accordion ---
         function toggleStep(stepId) {
             const content = document.getElementById(stepId);
@@ -657,6 +903,16 @@ Xahiş edirik texniki şöbəyə yönləndirin.
                 back.style.transform = 'rotateY(0deg)';
                 front.style.opacity = '0';
                 front.style.transform = 'rotateY(180deg)';
+            }
+        }
+
+        // --- Specs Toggle ---
+        function toggleSpecs(id) {
+            const element = document.getElementById(id);
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
             }
         }
 
