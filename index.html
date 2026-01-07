@@ -49,20 +49,6 @@
         }
     </style>
     <!-- Chosen Palette: Warm Professional -> Background: #f8fafc (Slate-50), Primary: #0f172a (Slate-900), Accent: #3b82f6 (Blue-500), Success: #10b981 (Emerald-500) -->
-    <!-- Application Structure Plan: 
-         1. Hero/Mission: Sets the mindset immediately (Control/Safety > Hardware).
-         2. Product Hub: Tabbed interface to switch between Software (Server) and Hardware (Trackers) for quick lookup during calls.
-         3. Sales Journey: An interactive vertical stepper that guides the rep through the 5 stages, revealing scripts and tips on demand.
-         4. Objection Dojo: Interactive cards to practice or quickly find answers to tough questions.
-         5. ROI Visualizer: A tool to demonstrate the "Price Justification" argument using a live chart.
-         6. Checklist: A functional form to ensure no data is missed before contracting.
-    -->
-    <!-- Visualization & Content Choices:
-         - ROI Chart: Bar chart (Chart.js) comparing 'System Cost' vs 'Monthly Theft Loss'. Goal: Visualise the "Price Justification" argument.
-         - Product Cards: Grid layout with Unicode icons and clear specs. Goal: Quick identification of the right tool for the client.
-         - Interaction: JavaScript tabs for navigation, accordions for sales stages, dynamic calculation for ROI.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
@@ -437,38 +423,93 @@
                             <label class="block text-sm font-medium text-slate-700">Avtomobil Markası/Model</label>
                             <input type="text" id="carModel" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm bg-slate-50 p-2 border" placeholder="Məs: Ford Transit 2022">
                         </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700">Yanacaq</label>
+                                <select id="fuelType" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm bg-slate-50 p-2 border">
+                                    <option>Dizel</option>
+                                    <option>Benzin</option>
+                                    <option>Qaz</option>
+                                    <option>Hibrid</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700">Say (Ədəd)</label>
+                                <input type="number" id="deviceCount" value="1" min="1" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm bg-slate-50 p-2 border">
+                            </div>
+                        </div>
+
                         <div>
-                            <label class="block text-sm font-medium text-slate-700">Yanacaq Növü</label>
-                            <select id="fuelType" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm bg-slate-50 p-2 border">
-                                <option>Dizel</option>
-                                <option>Benzin</option>
-                                <option>Qaz</option>
-                                <option>Hibrid</option>
+                            <label class="block text-sm font-medium text-slate-700">Seçilən Cihaz</label>
+                            <select id="selectedDevice" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm bg-slate-50 p-2 border">
+                                <option value="Queclink GV50">Queclink GV50 (Baza)</option>
+                                <option value="Teltonika FMC130">Teltonika FMC130 (Standart)</option>
+                                <option value="Teltonika FMC150">Teltonika FMC150 (Premium)</option>
+                                <option value="Digər">Digər</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700">Seçilən Server</label>
+                            <select id="selectedServer" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm bg-slate-50 p-2 border">
+                                <option value="Wialon Local">Wialon Local (go.gps.az)</option>
+                                <option value="GlonassSoft">GlonassSoft (baku.gps.az)</option>
+                                <option value="Digər">Digər</option>
                             </select>
                         </div>
                     </div>
+
                     <div class="space-y-4">
-                        <label class="block text-sm font-medium text-slate-700">Tələb olunan funksiyalar:</label>
-                        <div class="space-y-2">
+                        <label class="block text-sm font-medium text-slate-700 font-bold">Funksiyalar:</label>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
                             <label class="inline-flex items-center">
-                                <input type="checkbox" id="chkTracking" class="form-checkbox text-blue-600 h-5 w-5">
+                                <input type="checkbox" id="chkTracking" class="form-checkbox text-blue-600 h-4 w-4">
                                 <span class="ml-2 text-slate-700">Sadə izləmə</span>
-                            </label><br>
+                            </label>
                             <label class="inline-flex items-center">
-                                <input type="checkbox" id="chkEngine" class="form-checkbox text-blue-600 h-5 w-5">
-                                <span class="ml-2 text-slate-700">Mühərriki uzaqdan söndürmə</span>
-                            </label><br>
+                                <input type="checkbox" id="chkEngine" class="form-checkbox text-blue-600 h-4 w-4">
+                                <span class="ml-2 text-slate-700">Bloklama</span>
+                            </label>
                             <label class="inline-flex items-center">
-                                <input type="checkbox" id="chkFuel" class="form-checkbox text-blue-600 h-5 w-5">
-                                <span class="ml-2 text-slate-700">Yanacaq səviyyəsi (DUT)</span>
-                            </label><br>
+                                <input type="checkbox" id="chkFuel" class="form-checkbox text-blue-600 h-4 w-4">
+                                <span class="ml-2 text-slate-700">DUT (Yanacaq)</span>
+                            </label>
                             <label class="inline-flex items-center">
-                                <input type="checkbox" id="chkCan" class="form-checkbox text-blue-600 h-5 w-5">
-                                <span class="ml-2 text-slate-700">CAN-bus (Zəmanətli)</span>
+                                <input type="checkbox" id="chkCan" class="form-checkbox text-blue-600 h-4 w-4">
+                                <span class="ml-2 text-slate-700">CAN-bus</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" id="chkTemp" class="form-checkbox text-blue-600 h-4 w-4">
+                                <span class="ml-2 text-slate-700">Temperatur</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" id="chkCamera" class="form-checkbox text-blue-600 h-4 w-4">
+                                <span class="ml-2 text-slate-700">Kamera</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" id="chkRoaming" class="form-checkbox text-blue-600 h-4 w-4">
+                                <span class="ml-2 text-slate-700">Rouminq (Xarici)</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" id="chkSim" class="form-checkbox text-blue-600 h-4 w-4">
+                                <span class="ml-2 text-slate-700">Yerli SİM</span>
                             </label>
                         </div>
+
+                        <label class="block text-sm font-medium text-slate-700 font-bold mt-4">Quraşdırma Yeri:</label>
+                        <select id="installLocation" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm bg-slate-50 p-2 border">
+                            <option value="Ofis">Ofisdə (Bizim qaraj)</option>
+                            <option value="Şəhər">Şəhər daxili (Müştəri yeri)</option>
+                            <option value="Region">Region (Şəhərdən kənar)</option>
+                        </select>
                     </div>
                 </div>
+
+                <div class="mt-4">
+                    <label class="block text-sm font-medium text-slate-700">Əlavə Qeydlər / İstəklər</label>
+                    <textarea id="orderComments" rows="3" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm bg-slate-50 p-2 border" placeholder="Müştərinin xüsusi istəklərini bura yazın..."></textarea>
+                </div>
+
                 <div class="mt-6 flex justify-end">
                     <button onclick="sendOrder()" class="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition shadow-md">Sifarişi Tamamla (Email)</button>
                 </div>
@@ -479,7 +520,7 @@
 
     <footer class="bg-slate-900 text-slate-400 py-6 mt-12">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <p>&copy; 2026 GPS.AZ Satış Departamenti. Daxili istifadə üçün.</p>
+            <p>&copy; 2024 GPS.AZ Satış Departamenti. Daxili istifadə üçün.</p>
         </div>
     </footer>
 
@@ -489,12 +530,21 @@
             const name = document.getElementById('clientName').value;
             const model = document.getElementById('carModel').value;
             const fuel = document.getElementById('fuelType').value;
+            const count = document.getElementById('deviceCount').value;
+            const device = document.getElementById('selectedDevice').value;
+            const server = document.getElementById('selectedServer').value;
+            const location = document.getElementById('installLocation').value;
+            const comments = document.getElementById('orderComments').value;
             
             let features = [];
             if(document.getElementById('chkTracking').checked) features.push("Sadə izləmə");
-            if(document.getElementById('chkEngine').checked) features.push("Mühərriki uzaqdan söndürmə");
-            if(document.getElementById('chkFuel').checked) features.push("Yanacaq səviyyəsi (DUT)");
+            if(document.getElementById('chkEngine').checked) features.push("Mühərrik Bloklama");
+            if(document.getElementById('chkFuel').checked) features.push("DUT (Yanacaq)");
             if(document.getElementById('chkCan').checked) features.push("CAN-bus");
+            if(document.getElementById('chkTemp').checked) features.push("Temperatur");
+            if(document.getElementById('chkCamera').checked) features.push("Kamera");
+            if(document.getElementById('chkRoaming').checked) features.push("Rouminq (Xarici)");
+            if(document.getElementById('chkSim').checked) features.push("Yerli SİM");
 
             const subject = encodeURIComponent(`Yeni Sifariş: ${name}`);
             const body = encodeURIComponent(`
@@ -502,12 +552,24 @@ Salam Support,
 
 Yeni sifariş qeydə alındı:
 
+--- MÜŞTƏRİ MƏLUMATLARI ---
 Müştəri: ${name}
 Avtomobil: ${model}
-Yanacaq: ${fuel}
+Yanacaq Tipi: ${fuel}
+Say: ${count} ədəd
 
-Tələb olunan funksiyalar:
-${features.join('\n')}
+--- SEÇİM ---
+Cihaz: ${device}
+Server: ${server}
+
+--- TAPŞIRIQ ---
+Funksiyalar: 
+${features.join(', ')}
+
+Quraşdırma Yeri: ${location}
+
+--- QEYDLƏR ---
+${comments}
 
 Xahiş edirik texniki şöbəyə yönləndirin.
             `);
